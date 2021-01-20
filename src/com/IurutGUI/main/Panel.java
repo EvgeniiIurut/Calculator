@@ -15,6 +15,7 @@ public class Panel extends JPanel {
     private Font font = new Font("SanSerif", Font.BOLD, 20);
     private JTextField output = new JTextField();
     private JButton backspace = new JButton("<");
+    private JButton dot = new JButton(".");
     private JButton equ = new JButton("=");
     private JButton plus = new JButton("+");
     private JButton minus = new JButton("-");
@@ -25,16 +26,20 @@ public class Panel extends JPanel {
     private JButton del = new JButton("C");
     Calculator calculator = new Calculator();
 
-    private List<Character> charsAll = Arrays.asList('+', '-', '*', '/','(',')');
+    private List<Character> charsAll = Arrays.asList('+', '-', '*', '/','(',')','.');
 
     public Panel() {
         setLayout(null); // allow to set any location of buttons
         setFocusable(true);
         grabFocus();
         //---------------
-        backspace.setBounds(10, 250, 50, 50);
+        backspace.setBounds(250, 190, 50, 50);
         backspace.setFont(font);
         add(backspace);
+        //---------------
+        dot.setBounds(10, 250, 50, 50);
+        dot.setFont(font);
+        add(dot);
         //---------------
         equ.setBounds(130, 250, 50, 50);
         equ.setFont(font);
@@ -64,7 +69,7 @@ public class Panel extends JPanel {
         div.setFont(font);
         add(div);
         //---------------
-        del.setBounds(250, 190, 50, 110);
+        del.setBounds(250, 250, 50, 50);
         del.setFont(font);
         add(del);
         //---------------
@@ -99,6 +104,7 @@ public class Panel extends JPanel {
         div.addActionListener(l);
         parentheses1.addActionListener(l);
         parentheses2.addActionListener(l);
+        dot.addActionListener(l);
 
         addKeyListener(new KeyAdapter() {
             @Override
@@ -136,6 +142,7 @@ public class Panel extends JPanel {
                     output.setText(calculator.startCalc(temp));
                 }catch (Exception b) {
                     System.out.println("Значение отсутстует");
+                    output.setText("Ошибка ввода выражения");
                 }
             }
         });
